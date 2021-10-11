@@ -23,8 +23,53 @@
         
       <% end %>
     </table>
+    <div>
+  </div>
+
+<div>
+  <canvas id="myChart"
+   style="position: relative; height: 40vh; width: 80vw;" 
+  ></canvas>
+</div>
 
 </div>
 <% end %>
 <%= link_to "Edit", edit_user_path(@user) %> |
 <%= link_to "Back", users_path %>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const labels = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+];
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'My First dataset',
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'rgb(255, 99, 132)',
+    data: [0, 10, 5, 2, 20, 30, 45],
+  }]
+};
+const config = {
+  type: 'line',
+  data: data,
+  options: {
+    resize: false    
+  }
+};
+ // === include 'setup' then 'config' above ===
+
+  var canvas = document.getElementById('myChart');
+  var myChart = new Chart(
+    canvas,
+    config
+  );
+  // canvas.width = 200;
+  // canvas.height = 100;
+</script>
