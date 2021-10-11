@@ -64,6 +64,6 @@ class TickersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ticker_params
-      params.require(:ticker).permit(:ticker, :description, :url)
+      params.require(:ticker).permit(:ticker, :description, :url, :price, :precision)
     end
 end

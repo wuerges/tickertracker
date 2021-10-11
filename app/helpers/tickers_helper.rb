@@ -1,2 +1,2 @@
-module TickersHelper
+module TickersHelper    
 end

@@ -14,6 +14,18 @@
   <strong>Url:</strong>
   <%= @ticker.url %>
 </p>
+<p>
+  <strong>Price (formatted):</strong>
+  <%= @ticker.formatted_price %>
+</p>
+<p>
+  <strong>Price:</strong>
+  <%= @ticker.price %>
+</p>
+<p>
+  <strong>Precision:</strong>
+  <%= @ticker.precision %>
+</p>
 
 <%= link_to 'Edit', edit_ticker_path(@ticker) %> |
 <%= link_to 'Back', tickers_path %>
