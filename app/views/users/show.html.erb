@@ -4,15 +4,27 @@
   <%= @user.login %>
 </p>
 
-<%
-@user.ledgers.each do
-%>
+<% @user.ledgers.each do |ledger| %>
 <div>
-  <p> Ledger X
-  </p>
+  <h1> <%= ledger.ticker.ticker %> : <%= ledger.ticker.formatted_price %>
+  </h1>
+
+    <table>
+      <tr> <th> Balance </th> <th> Total value </th> <th> Average Price </th> </tr>
+      <tr> <td> <%= ledger.balance %> </td> <td> <%= ledger.total_value %> </td> <td> <%= "%.2f" % ledger.average_price %> </td> </tr>
+    </table>
+
+  <h2> Orders </h2>
+
+    <table>
+      <tr> <th> Amount </th> <th> Price </th> </tr>
+      <% ledger.orders.each do |order| %>
+          <tr><td> <%= order.amount %> </td> <td> <%= order.price %></td> </tr>
+        
+      <% end %>
+    </table>
+
 </div>
-<%
-end
-%>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% end %>
+<%= link_to "Edit", edit_user_path(@user) %> |
+<%= link_to "Back", users_path %>
