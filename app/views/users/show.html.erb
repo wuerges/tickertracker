@@ -1,9 +1,18 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>Login:</strong>
   <%= @user.login %>
 </p>
 
+<%
+@user.ledgers.each do
+%>
+<div>
+  <p> Ledger X
+  </p>
+</div>
+<%
+end
+%>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
