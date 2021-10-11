@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :tickers do
     member do
       post 'fetch_price'

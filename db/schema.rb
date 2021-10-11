@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_11_162535) do
+ActiveRecord::Schema.define(version: 2021_10_11_181704) do
+
+  create_table "ledgers", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "ticker_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ticker_id"], name: "index_ledgers_on_ticker_id"
+    t.index ["user_id"], name: "index_ledgers_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "amount"
+    t.integer "price"
+    t.integer "ledger_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ledger_id"], name: "index_orders_on_ledger_id"
+  end
 
   create_table "tickers", force: :cascade do |t|
     t.string "ticker"
@@ -22,4 +40,13 @@ ActiveRecord::Schema.define(version: 2021_10_11_162535) do
     t.integer "precision"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "login"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "ledgers", "tickers"
+  add_foreign_key "ledgers", "users"
+  add_foreign_key "orders", "ledgers"
 end
