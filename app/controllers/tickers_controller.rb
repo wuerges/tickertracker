@@ -1,5 +1,5 @@
 class TickersController < ApplicationController
-  before_action :set_ticker, only: %i[ show edit update destroy ]
+  before_action :set_ticker, only: %i[ fetch_price show edit update destroy ]
 
   # GET /tickers or /tickers.json
   def index
@@ -46,6 +46,20 @@ class TickersController < ApplicationController
       end
     end
   end
+
+  # POST /tickers/1/fetch
+  def fetch_price
+    respond_to do |format|
+      if @ticker.fetch_price!
+        format.html { redirect_to @ticker, notice: "Ticker was successfully updated." }
+        format.json { render :show, status: :ok, location: @ticker }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @ticker.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   # DELETE /tickers/1 or /tickers/1.json
   def destroy

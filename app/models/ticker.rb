@@ -15,10 +15,12 @@ class Ticker < ApplicationRecord
         json_respose = JSON.parse(response)
         text_amount = json_respose["data"]["amount"]
         self.set_amount!(text_amount)
+        true
     end
 
     def set_amount!(amount)
         val = amount.to_f * (10 ** self.precision)
-        self.price = val.to_i        
+        self.price = val.to_i
+        self.save!
     end
 end

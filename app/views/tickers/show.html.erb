@@ -27,5 +27,9 @@
   <%= @ticker.precision %>
 </p>
 
+<p>
+<%= button_to 'Fetch price', fetch_price_ticker_path(@ticker) %>
+</p>
+
 <%= link_to 'Edit', edit_ticker_path(@ticker) %> |
 <%= link_to 'Back', tickers_path %>

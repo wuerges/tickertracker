@@ -10,7 +10,6 @@ class TickerTest < ActiveSupport::TestCase
 
   test "checks fetch ticker price" do
     ticker_fake = Ticker.new(:url => "https://api.coinbase.com/v2/prices/BTC-USD/buy", :precision => 2)
-    ticker_fake.fetch_price!
-    assert true
+    assert ticker_fake.fetch_price!
   end
 end
