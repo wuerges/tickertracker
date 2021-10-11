@@ -2,6 +2,8 @@ require 'open-uri'
 require 'json'
 
 class Ticker < ApplicationRecord
+    has_many :ledger, dependent: :destroy 
+
     def formatted_price
         if self.price.nil? || self.precision.nil?
             0
