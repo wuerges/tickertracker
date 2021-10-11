@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_11_162102) do
+ActiveRecord::Schema.define(version: 2021_10_11_162535) do
 
   create_table "tickers", force: :cascade do |t|
     t.string "ticker"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2021_10_11_162102) do
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "price"
+    t.integer "precision"
   end
 
 end
