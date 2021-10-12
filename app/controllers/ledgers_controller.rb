@@ -20,6 +20,6 @@ class LedgersController < ApplicationController
   end
 
   def ledger_params
-    params.require(:order).permit(:amount)    
+    params.permit(:amount)    
   end
 end
