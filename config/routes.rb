@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  # get 'orders/create'
+  # get 'orders/destroy'
+  # get 'ledgers/index'
+  # get 'ledgers/show'
+  resources :ledgers, only: [] do
+    resources :orders, only: [:create, :destroy]
+  end
   resources :users
   resources :tickers do
     member do
