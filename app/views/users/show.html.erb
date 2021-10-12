@@ -3,33 +3,58 @@
   <strong>Login:</strong>
   <%= @user.login %>
 </h1>
-
 <% @user.ledgers.each do |ledger| %>
-<div>
-  <h2> <%= ledger.ticker.ticker %> : <%= ledger.ticker.formatted_price %>
-  </h2>
-
+  <div>
+    <h2> <%= ledger.ticker.ticker %> : <%= ledger.ticker.formatted_price %>
+    </h2>
+    <p>
+      <%= form_with url: ledger_buy_url(ledger) do |form| %>
+        <%= form.text_field :amount, value: 0 %>
+        <%= form.submit 'Buy' %>
+      <% end %>
+    </p>
     <table>
-      <tr> <th> Balance </th> <th> Total value </th> <th> Average Price </th>  <th> Date </th> </tr>
-      <tr> <td> <%= ledger.balance %> </td> <td> <%= ledger.total_value %> </td> <td> <%= "%.2f" % ledger.average_price %> </td>  <td> <%= Date.today %> </td> </tr>
+      <tr> 
+        <th> Balance </th>
+         
+        <th> Total value </th>
+         
+        <th> Average Price </th>
+          
+        <th> Date </th>
+         </tr>
+      <tr> 
+        <td> <%= ledger.balance %> </td>
+         
+        <td> <%= ledger.total_value %> </td>
+         
+        <td> <%= "%.2f" % ledger.average_price %> </td>
+          
+        <td> <%= Date.today %> </td>
+         </tr>
     </table>
-
-  <h3> Orders </h3>
-
+    <h3> Orders </h3>
     <table>
-      <tr> <th> Amount </th> <th> Price </th> <th> Date </th> </tr>
+      <tr> 
+        <th> Amount </th>
+         
+        <th> Price </th>
+         
+        <th> Date </th>
+         </tr>
       <% ledger.orders.each do |order| %>
-          <tr>
-          <td> <%= order.amount %> </td> 
-          <td> <%= order.price %> </td> <td>
-          <%= order.created_at %> </td> </tr>
-        
+        <tr>
+          <td> <%= order.amount %> </td>
+          <td> <%= order.price %> </td>
+           
+          <td>
+            <%= order.created_at %> </td>
+           </tr>
       <% end %>
     </table>
     <div>
+    </div>
   </div>
-
-</div>
 <% end %>
 <%= link_to "Edit", edit_user_path(@user) %> |
 <%= link_to "Back", users_path %>
