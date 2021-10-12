@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:ledger_id, :order, :amount, :price)
+    params.require(:order).permit(:ledger_id, :amount, :price)
   end
 
 end

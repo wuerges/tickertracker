@@ -1,13 +1,25 @@
 require "test_helper"
 
 class OrdersControllerTest < ActionDispatch::IntegrationTest
-  test "should get create" do
-    get orders_create_url
-    assert_response :success
+
+  setup do
+    @user = users(:one)
+    @ticker = tickers(:one)
+    @ledger = @user.ledgers.create(ticker: @ticker)
+    @order = orders(:one)
   end
 
-  test "should get destroy" do
-    get orders_destroy_url
-    assert_response :success
+  test "should post create" do
+
+    assert_difference('@ledger.orders.count', 1) do
+      post ledger_orders_url(@ledger), params: { order: { amount: @order.amount, price: @order.price } }
+    end
+
+    assert_redirected_to user_url(@ledger.user)
   end
+
+  # test "should post destroy" do
+  #   get orders_destroy_url
+  #   assert_response :success
+  # end
 end
