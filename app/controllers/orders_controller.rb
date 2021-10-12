@@ -3,21 +3,26 @@ class OrdersController < ApplicationController
 
   # POST /ledgers/1/orders
   def create
+    @ledger.orders.create(order_params)
+    respond_to do |format|
+      format.html { redirect_to user_url(@ledger.user), notice: "Order was created." }
+      format.json { head :no_content }
+    end
   end
 
   # DELETE /ledgers/1/orders/1
   def destroy
+    @ledger.orders.find(params[:id]).destroy
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_ledger
-    @ledger = Ledger.find(params[:id])
+    @ledger = Ledger.find(params[:ledger_id])
   end
 
-  # Only allow a list of trusted parameters through.
-  # def order_params
-    # params.require(:ledger_id).permit(:ticker, :description, :url, :price, :precision)
-  # end
+  def order_params
+    params.require(:ledger_id, :order, :amount, :price)
+  end
 
 end
