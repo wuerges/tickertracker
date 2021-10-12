@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+ .ledger {
+    padding: 4px;
+    border: solid;
+    border-width: thin;
+    margin: 4px;
+}

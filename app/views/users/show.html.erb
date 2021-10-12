@@ -4,7 +4,7 @@
   <%= @user.login %>
 </h1>
 <% @user.ledgers.each do |ledger| %>
-  <div>
+  <div class='ledger'>
     <h2> <%= ledger.ticker.ticker %> : <%= ledger.ticker.formatted_price %>
     </h2>
     <p>
