@@ -9,13 +9,25 @@
 case Rails.env
 when "development"
   user = User.create(login: "Jack Boggle")
-  ticker = Ticker.create(ticker: "BTCUSD",
+  btc_ticker = Ticker.create(ticker: "BTCUSD",
                          description: "BTC/USD from Coinbase",
                          url: "https://api.coinbase.com/v2/prices/BTC-USD/buy",
                          precision: 2)
-  ticker.fetch_price!
-  btc_ledger = user.ledgers.create(ticker: ticker)
+  btc_ticker.fetch_price!
+  btc_ledger = user.ledgers.create(ticker: btc_ticker)
   btc_ledger.orders.create(amount: 1, price: 10)
   btc_ledger.orders.create(amount: 2, price: 5)
   btc_ledger.orders.create(amount: 3, price: 1)
+
+  eth_ticker = Ticker.create(ticker: "ETHUSD",
+                         description: "ETH/USD from Coinbase",
+                         url: "https://api.coinbase.com/v2/prices/ETH-USD/buy",
+                         precision: 2)
+  eth_ticker.fetch_price!
+
+  eth_ledger = user.ledgers.create(ticker: eth_ticker)
+  eth_ledger.orders.create(amount: 1, price: 10)
+  eth_ledger.orders.create(amount: 2, price: 5)
+  eth_ledger.orders.create(amount: 3, price: 1)
+
 end
