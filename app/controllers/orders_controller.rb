@@ -13,6 +13,10 @@ class OrdersController < ApplicationController
   # DELETE /ledgers/1/orders/1
   def destroy
     @ledger.orders.find(params[:id]).destroy
+    respond_to do |format|
+      format.html { redirect_to user_url(@ledger.user), notice: "Order was destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private
@@ -24,5 +28,4 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:ledger_id, :amount, :price)
   end
-
 end
