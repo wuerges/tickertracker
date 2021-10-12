@@ -10,66 +10,26 @@
   </h1>
 
     <table>
-      <tr> <th> Balance </th> <th> Total value </th> <th> Average Price </th> </tr>
-      <tr> <td> <%= ledger.balance %> </td> <td> <%= ledger.total_value %> </td> <td> <%= "%.2f" % ledger.average_price %> </td> </tr>
+      <tr> <th> Balance </th> <th> Total value </th> <th> Average Price </th>  <th> Date </th> </tr>
+      <tr> <td> <%= ledger.balance %> </td> <td> <%= ledger.total_value %> </td> <td> <%= "%.2f" % ledger.average_price %> </td>  <td> <%= Date.today %> </td> </tr>
     </table>
 
   <h2> Orders </h2>
 
     <table>
-      <tr> <th> Amount </th> <th> Price </th> </tr>
+      <tr> <th> Amount </th> <th> Price </th> <th> Date </th> </tr>
       <% ledger.orders.each do |order| %>
-          <tr><td> <%= order.amount %> </td> <td> <%= order.price %></td> </tr>
+          <tr>
+          <td> <%= order.amount %> </td> 
+          <td> <%= order.price %> </td> <td>
+          <%= order.created_at %> </td> </tr>
         
       <% end %>
     </table>
     <div>
   </div>
 
-<div>
-  <canvas id="myChart"
-   style="position: relative; height: 40vh; width: 80vw;" 
-  ></canvas>
-</div>
-
 </div>
 <% end %>
 <%= link_to "Edit", edit_user_path(@user) %> |
 <%= link_to "Back", users_path %>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-const labels = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-];
-const data = {
-  labels: labels,
-  datasets: [{
-    label: 'My First dataset',
-    backgroundColor: 'rgb(255, 99, 132)',
-    borderColor: 'rgb(255, 99, 132)',
-    data: [0, 10, 5, 2, 20, 30, 45],
-  }]
-};
-const config = {
-  type: 'line',
-  data: data,
-  options: {
-    resize: false    
-  }
-};
- // === include 'setup' then 'config' above ===
-
-  var canvas = document.getElementById('myChart');
-  var myChart = new Chart(
-    canvas,
-    config
-  );
-  // canvas.width = 200;
-  // canvas.height = 100;
-</script>
